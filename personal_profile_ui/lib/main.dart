@@ -55,6 +55,39 @@ class MyHomePage extends StatelessWidget {
               ),
             ],
           ),
+
+          SizedBox(height: 25),
+          Row(
+            children: [
+              Text(
+                'Complete your profile ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '(1/5)',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            children: List.generate(5, (index) {
+              return Expanded(
+                child: Container(
+                  height: 7,
+                  margin: EdgeInsets.only(right: index == 4 ? 0 : 6),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: index == 0 ? Colors.blue : Colors.black12,
+                  ),
+                ),
+              );
+            }),
+          ),
+          SizedBox(height: 10),
         ],
       ),
     );
