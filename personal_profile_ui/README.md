@@ -1,16 +1,7 @@
 # personal_profile_ui
 
-A new Flutter project.
+A clean and modern Flutter Profile UI featuring a user profile picture, role title, progress indicator for profile completion, and quick action cards such as uploading a resume and adding skills. The design also includes navigation tabs (Home, Messages, Discover, Profile) and a minimal, responsive layout suitable for job or networking apps.
 
-## Getting Started
+![alt text](lib/Assets/Screenshot_1760350616.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![alt text](lib/Assets/Screenshot_1760350620.png)
