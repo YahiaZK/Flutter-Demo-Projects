@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+import '../data/database.dart';
 import '../utils/dialog_box.dart';
 import '../utils/todo_tile.dart';
 
@@ -11,25 +13,37 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List toDoList = [
-    ['task one', true],
-    ['task two', false],
-    ['task three', true],
-  ];
+  final _myBox = Hive.box('mybox');
+
+  ToDoDataBase db = ToDoDataBase();
+
+  @override
+  void initState() {
+    if (_myBox.get('TODOLIST') == null) {
+      db.createInitialData();
+    } else {
+      db.loadData();
+    }
+
+    super.initState();
+  }
+
   final _controller = TextEditingController();
 
   void checkBoxChanged(bool? value, int index) {
     setState(() {
-      toDoList[index][1] = value!;
+      db.toDoList[index][1] = value!;
     });
+    db.updateDataBase();
   }
 
   void saveNewTask() {
     setState(() {
-      toDoList.add([_controller.text, false]);
+      db.toDoList.add([_controller.text, false]);
       _controller.clear();
     });
     Navigator.of(context).pop();
+    db.updateDataBase();
   }
 
   void createNewTask() {
@@ -60,18 +74,19 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       body: ListView.builder(
-        itemCount: toDoList.length,
+        itemCount: db.toDoList.length,
         itemBuilder: (context, index) {
-          final taskName = toDoList[index][0];
+          final taskName = db.toDoList[index][0];
           return ToDoTile(
             key: ValueKey(taskName),
             taskName: taskName,
-            taskCompleted: toDoList[index][1],
+            taskCompleted: db.toDoList[index][1],
             onChanged: (value) => checkBoxChanged(value, index),
-            deleteTask: (context){
+            deleteTask: (context) {
               setState(() {
-              toDoList.removeAt(index);
+                db.toDoList.removeAt(index);
               });
+              db.updateDataBase();
             },
           );
         },
