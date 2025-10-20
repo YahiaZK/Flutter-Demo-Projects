@@ -5,7 +5,7 @@ import 'screens/home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  var box = await Hive.openBox('mybox');
+  await Hive.openBox('mybox');
   runApp(const MyApp());
 }
 
