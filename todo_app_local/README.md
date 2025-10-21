@@ -1,8 +1,8 @@
-📝 Flutter To-Do App
+# 📝 Flutter To-Do App
 
 A simple and elegant To-Do List application built with Flutter, featuring task management with checkboxes, swipe-to-delete functionality, and persistent local storage using Hive.
 
-🚀 Features
+## 🚀 Features
 
 ✅ Add new tasks using a floating action button that opens a dialog (AlertDialog) with a text field.
 
@@ -14,7 +14,7 @@ A simple and elegant To-Do List application built with Flutter, featuring task m
 
 🧭 Clean and minimal UI for a smooth user experience.
 
-🧩 Packages Used
+## 🧩 Packages Used
 
 flutter_slidable
 – for swipe actions on task cards
@@ -23,7 +23,7 @@ hive
 & hive_flutter
 – for local data storage
 
-📸 Preview
+## 📸 Preview
 
 <table align="center" border="0" cellspacing="0">
   <tr>
