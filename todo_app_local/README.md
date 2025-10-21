@@ -17,13 +17,13 @@ A simple and elegant To-Do List application built with Flutter, featuring task m
 🧩 Packages Used
 
 flutter_slidable
- – for swipe actions on task cards
+– for swipe actions on task cards
 
 hive
- & hive_flutter
- – for local data storage
+& hive_flutter
+– for local data storage
 
-📸 Preview 
+📸 Preview
 
 <table align="center" border="0" cellspacing="0">
   <tr>
@@ -33,6 +33,8 @@ hive
     <td align="center" width="50%">
       <img src="screenshots/todoScreenshot2.png" alt="Screenshot 2" width="60%"/>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="50%">
       <img src="screenshots/todoScreenshot3.png" alt="Screenshot 2" width="60%"/>
     </td>
