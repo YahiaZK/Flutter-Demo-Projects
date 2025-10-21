@@ -1,16 +1,40 @@
-# todo_app_local
+📝 Flutter To-Do App
 
-A new Flutter project.
+A simple and elegant To-Do List application built with Flutter, featuring task management with checkboxes, swipe-to-delete functionality, and persistent local storage using Hive.
 
-## Getting Started
+🚀 Features
 
-This project is a starting point for a Flutter application.
+✅ Add new tasks using a floating action button that opens a dialog (AlertDialog) with a text field.
 
-A few resources to get you started if this is your first Flutter project:
+🗑️ Delete tasks easily by swiping — powered by the flutter_slidable package.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+☑️ Check off completed tasks using checkboxes.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+💾 Persistent local storage — tasks are saved locally using Hive, so your data remains even after closing the app.
+
+🧭 Clean and minimal UI for a smooth user experience.
+
+🧩 Packages Used
+
+flutter_slidable
+ – for swipe actions on task cards
+
+hive
+ & hive_flutter
+ – for local data storage
+
+📸 Preview 
+
+<table align="center" border="0" cellspacing="0">
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/todoScreenshot1.png" alt="Screenshot 1" width="60%"/>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/todoScreenshot2.png" alt="Screenshot 2" width="60%"/>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/todoScreenshot3.png" alt="Screenshot 2" width="60%"/>
+    </td>
+  </tr>
+</table>
