@@ -83,7 +83,6 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
         children: [
           Expanded(
             child: Container(
-              color: Colors.grey[850],
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
