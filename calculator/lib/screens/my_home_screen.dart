@@ -1,5 +1,6 @@
 import 'package:calculator/utils/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -15,7 +16,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   List<String> buttons = [
     'C',
     'Del',
-    '%',
+    'AC',
     '/',
 
     '7',
@@ -35,9 +36,44 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
     '.',
     '0',
-    'Ans',
+    '%',
     '=',
   ];
+
+  bool isOperator(String x) {
+    if (x == '=' || x == '+' || x == '-' || x == 'x' || x == '/' || x == '%') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void equalPressed() {
+    if (expression.isEmpty) {
+      return;
+    }
+
+    String finalExpression = expression;
+    finalExpression = finalExpression.replaceAll('x', '*');
+    try {
+      ExpressionParser p = GrammarParser();
+      Expression exp = p.parse(finalExpression);
+      var cm = ContextModel();
+      var evaluator = RealEvaluator(cm);
+      num eval = evaluator.evaluate(exp);
+
+      if (eval.isInfinite || eval.isNaN) {
+        result = 'Error';
+      } else {
+        result = eval.toString();
+        if (result.endsWith('.0')) {
+          result = result.substring(0, result.length - 2);
+        }
+      }
+    } catch (e) {
+      result = 'Error';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +127,18 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         });
                       },
                     );
+                  } else if (buttons[index] == 'AC') {
+                    return MyButton(
+                      color: Colors.grey[500],
+                      buttonText: buttons[index],
+                      textColor: Colors.black,
+                      onPressed: () {
+                        setState(() {
+                          expression = '';
+                          result = '';
+                        });
+                      },
+                    );
                   } else if (buttons[index] == 'Del') {
                     return MyButton(
                       color: Colors.grey[500],
@@ -109,6 +157,17 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         });
                       },
                     );
+                  } else if (buttons[index] == '=') {
+                    return MyButton(
+                      color: Colors.orange,
+                      buttonText: buttons[index],
+                      textColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          equalPressed();
+                        });
+                      },
+                    );
                   } else {
                     return MyButton(
                       color: isOperator(buttons[index])
@@ -118,7 +177,22 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       textColor: Colors.white,
                       onPressed: () {
                         setState(() {
-                          expression += buttons[index];
+                          String buttonText = buttons[index];
+
+                          if (isOperator(buttonText) &&
+                              expression.isNotEmpty &&
+                              isOperator(expression[expression.length - 1])) {
+                            expression = expression.substring(
+                              0,
+                              expression.length - 1,
+                            );
+                          }
+                          if (isOperator(buttonText) &&
+                              expression.isEmpty &&
+                              buttonText != '-') {
+                            return;
+                          }
+                          expression += buttonText;
                         });
                       },
                     );
@@ -130,13 +204,5 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
         ],
       ),
     );
-  }
-
-  bool isOperator(String x) {
-    if (x == '=' || x == '+' || x == '-' || x == 'x' || x == '/' || x == '%') {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
