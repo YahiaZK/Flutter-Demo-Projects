@@ -15,6 +15,14 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isChar(String x) {
+      if (x == 'C' || x == 'Del' || x == 'AC') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
@@ -23,9 +31,13 @@ class MyButton extends StatelessWidget {
         child: Center(
           child: Text(
             buttonText,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineMedium!.copyWith(color: textColor),
+            style: isChar(buttonText)
+                ? Theme.of(
+                    context,
+                  ).textTheme.titleLarge!.copyWith(color: textColor)
+                : Theme.of(
+                    context,
+                  ).textTheme.headlineLarge!.copyWith(color: textColor),
           ),
         ),
       ),
