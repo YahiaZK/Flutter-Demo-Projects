@@ -1,16 +1,44 @@
-# expense_tracker_local_storage
+# 💰 Flutter Expense Tracker
 
-A new Flutter project.
+A simple and intuitive Expense Tracker app built using Flutter.
 
-## Getting Started
+## 🚀 Features
 
-This project is a starting point for a Flutter application.
+- Dynamic Expense List:
+  Uses ListView.builder to display a scrollable list of expenses efficiently.
 
-A few resources to get you started if this is your first Flutter project:
+- Total Summary Card:
+  Shows the total expenses at the top inside a stylish Card widget.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Local Storage with Hive:
+  Stores all expense data locally using the fast and lightweight Hive database.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Swipe to Delete:
+  Integrated the flutter_slidable package to enable a smooth slide-to-delete action on expense items.
+
+- Clean UI:
+  Simple, user-friendly interface designed for quick expense tracking.
+
+## 🧱 Tech Stack
+
+- Framework: Flutter
+- Language: Dart
+- Packages Used:
+  - hive → for local storage
+  - flutter_slidable → for swipe-to-delete functionality
+
+<table align="center" border="0" cellspacing="0">
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/ExpenseTrackerScreenshot1.png" alt="Screenshot 1" width="60%"/>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/ExpenseTrackerScreenshot2.png" alt="Screenshot 2" width="60%"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/ExpenseTrackerScreenshot3.png" alt="Screenshot 2" width="60%"/>
+    </td>
+  </tr>
+</table>
