@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AddExpenseDialog extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController expenseNameController;
+  final TextEditingController expenseAmountController;
   final VoidCallback onSave;
   final VoidCallback onCancel;
   const AddExpenseDialog({
     super.key,
-    required this.controller,
+    required this.expenseNameController,
+    required this.expenseAmountController,
     required this.onSave,
     required this.onCancel,
   });
@@ -17,17 +19,32 @@ class AddExpenseDialog extends StatelessWidget {
       title: Text('Add an Expense'),
       content: SizedBox(
         width: 300,
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            label: Text('Add new Expense'),
+        child: Form(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: expenseNameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('New Expense'),
+                ),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                controller: expenseAmountController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Amount'),
+                ),
+              ),
+            ],
           ),
         ),
       ),
       actions: [
-        ElevatedButton(onPressed: onCancel, child: Text('CANCEL')),
-        ElevatedButton(onPressed: onSave, child: Text('ADD')),
+        TextButton(onPressed: onCancel, child: Text('CANCEL')),
+        TextButton(onPressed: onSave, child: Text('ADD')),
       ],
     );
   }
