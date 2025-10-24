@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+import 'models/weather_model.dart';
 import 'screens/my_home_screen.dart';
 
-void main() {
+void main() async{
+  
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(WeatherAdapter());
+  await Hive.openBox<Weather>('weatherBox');
+
   runApp(const MyApp());
 }
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:weather_app/models/weather_model.dart';
-import 'package:weather_app/services/weather_service.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import '../models/weather_model.dart';
+import '../services/weather_service.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -15,16 +17,32 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   Weather? _weather;
 
+  final _weatherBox = Hive.box<Weather>('weatherBox');
+
   _fetchWeather() async {
-    String cityName = await _weatherService.getCurrentCity();
+    setState(() {
+      _weather = null;
+    });
 
     try {
+      String cityName = await _weatherService.getCurrentCity();
       final weather = await _weatherService.getWeather(cityName);
+
+      _weatherBox.put('currentweather', weather);
+
       setState(() {
         _weather = weather;
       });
     } catch (e) {
+      print("Could not fetch from API. Loading from cache.");
       print(e);
+
+      final cachedWeather = _weatherBox.get('currentweather');
+      if (cachedWeather != null) {
+        setState(() {
+          _weather = cachedWeather;
+        });
+      }
     }
   }
 
