@@ -1,16 +1,49 @@
-# weather_app
+# 🌦️ Flutter Weather App
 
-A new Flutter project.
+A beautiful and responsive **Weather App** built using **Flutter**, displaying real-time weather data with animated visuals that match the current conditions.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🌍 **Real-time Weather Data:** Fetches live temperature, humidity, and weather conditions using a weather API.
+- 📍 **Location Detection:** Automatically detects the user’s location using `geolocator` and `geocoding`.
+- 🌤️ **Animated UI:** Uses **Lottie animations** to display weather-specific visuals (e.g., sunny, rainy, cloudy).
+- 💾 **Offline Mode:** Implements caching with **Hive** for offline data access.
+- ⚡ **Smooth Performance:** Optimized network calls and efficient local storage ensure a seamless experience.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🧱 Tech Stack
+
+**Framework:** Flutter  
+**Language:** Dart
+
+### 📦 Packages Used
+
+| Purpose                           | Package                |
+| --------------------------------- | ---------------------- |
+| HTTP requests                     | `http`                 |
+| Get user location                 | `geolocator`           |
+| Convert coordinates to city names | `geocoding`            |
+| Animations                        | `lottie`               |
+| Local storage                     | `hive`, `hive_flutter` |
+
+### 🛠️ Dev Dependencies
+
+| Purpose              | Package          |
+| -------------------- | ---------------- |
+| Hive type generation | `hive_generator` |
+| Code generation      | `build_runner`   |
+
+
+## 📸 Preview
+
+<table align="center" border="0" cellspacing="0">
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/weatherAppScreenshot1.png" alt="Screenshot 1" width="60%"/>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/weatherAppScreenshot2.png" alt="Screenshot 2" width="60%"/>
+    </td>
+  </tr>
+</table>
