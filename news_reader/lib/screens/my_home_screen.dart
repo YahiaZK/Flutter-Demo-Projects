@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:news_reader/models/news_model.dart';
 import 'package:news_reader/services/news_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -116,8 +117,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 8,
                       children: [
-                        Image.network(
-                          article?.urlToImage ?? PLACEHOLDER_IMAGE_LINK,
+                        CachedNetworkImage(
+                          imageUrl:
+                              article?.urlToImage ?? PLACEHOLDER_IMAGE_LINK,
                           fit: BoxFit.contain,
                         ),
                         Text(
