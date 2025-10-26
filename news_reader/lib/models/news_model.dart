@@ -1,9 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'article.dart';
 
+part 'news_model.g.dart';
+
+@HiveType(typeId: 0)
 class NewsResponse {
+  @HiveField(0)
   final int totalResults;
+  @HiveField(1)
   final List<Article> articles;
   const NewsResponse({required this.totalResults, required this.articles});
 

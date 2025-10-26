@@ -1,8 +1,18 @@
+import 'package:hive/hive.dart';
+
+part 'article.g.dart';
+
+@HiveType(typeId: 1)
 class Article {
+  @HiveField(0)
   final String author;
+  @HiveField(2)
   final String title;
+  @HiveField(3)
   final String description;
+  @HiveField(4)
   final String? urlToImage;
+  @HiveField(5)
   final String date;
 
   const Article({

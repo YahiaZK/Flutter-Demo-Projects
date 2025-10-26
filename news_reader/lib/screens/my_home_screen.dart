@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_reader/models/news_model.dart';
 import 'package:news_reader/services/news_service.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -11,17 +12,40 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
+  void saveNewResponse(NewsResponse newsResponse) {
+    final myBox = Hive.box<NewsResponse>('newsReader');
+    myBox.put('latestNews', newsResponse);
+  }
+
+  NewsResponse? loadNewsResponse() {
+    final myBox = Hive.box<NewsResponse>('newsReader');
+    return myBox.get('latestNews');
+  }
+
   NewsResponse? _newsResponse;
   NewsService newsService = NewsService('0712d951502b4ef2bdfcde57da72c8f8');
 
   _fetchNewsResponse() async {
     try {
+      setState(() {
+        _newsResponse = null;
+      });
+
       final newsResponse = await newsService.getNewsResponse();
       setState(() {
         _newsResponse = newsResponse;
       });
+      saveNewResponse(newsResponse);
     } catch (e) {
+      print('condnt load new data');
       print(e);
+
+      final cachedNews = loadNewsResponse();
+      if (cachedNews != null) {
+        setState(() {
+          _newsResponse = cachedNews;
+        });
+      }
     }
   }
 

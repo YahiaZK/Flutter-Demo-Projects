@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:news_reader/models/article.dart';
+import 'package:news_reader/models/news_model.dart';
 
 import 'screens/my_home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(NewsResponseAdapter()); 
+  Hive.registerAdapter(ArticleAdapter());
+
+  await Hive.openBox<NewsResponse>('newsReader');
+
   runApp(const MyApp());
 }
 
