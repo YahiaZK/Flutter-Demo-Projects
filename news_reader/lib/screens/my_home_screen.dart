@@ -50,6 +50,18 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     }
   }
 
+  Future<void> _handleRefresh() async {
+    try {
+      final newsResponse = await newsService.getNewsResponse();
+      setState(() {
+        _newsResponse = newsResponse;
+      });
+      saveNewResponse(newsResponse);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   formatDate(String dateString) {
     try {
       final dateTime = DateTime.parse(dateString);
@@ -107,59 +119,63 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 ),
 
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: _newsResponse?.articles.length,
-                    itemBuilder: (context, index) {
-                      var article = _newsResponse?.articles[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 8,
-                            children: [
-                              CachedNetworkImage(
-                                imageUrl:
-                                    article?.urlToImage ??
-                                    PLACEHOLDER_IMAGE_LINK,
-                                fit: BoxFit.contain,
-                              ),
-                              Text(
-                                'News',
-                                style: Theme.of(context).textTheme.labelLarge!
-                                    .copyWith(
-                                      color: primaryGreenColor,
-                                      fontWeight: FontWeight.bold,
+                  child: RefreshIndicator(
+                    color: primaryGreenColor,
+                    onRefresh: _handleRefresh,
+                    child: ListView.builder(
+                      itemCount: _newsResponse?.articles.length,
+                      itemBuilder: (context, index) {
+                        var article = _newsResponse?.articles[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              spacing: 8,
+                              children: [
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      article?.urlToImage ??
+                                      PLACEHOLDER_IMAGE_LINK,
+                                  fit: BoxFit.contain,
+                                ),
+                                Text(
+                                  'News',
+                                  style: Theme.of(context).textTheme.labelLarge!
+                                      .copyWith(
+                                        color: primaryGreenColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                                Text(
+                                  article?.title ?? '',
+                                  style: Theme.of(context).textTheme.titleLarge!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${article?.author ?? ''} , ${formatDate(article?.date ?? '')}",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
-                              ),
-                              Text(
-                                article?.title ?? '',
-                                style: Theme.of(context).textTheme.titleLarge!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${article?.author ?? ''} , ${formatDate(article?.date ?? '')}",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w300,
+                                    Icon(
+                                      Icons.share,
+                                      size: 20,
+                                      color: Colors.grey[700],
                                     ),
-                                  ),
-                                  Icon(
-                                    Icons.share,
-                                    size: 20,
-                                    color: Colors.grey[700],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
