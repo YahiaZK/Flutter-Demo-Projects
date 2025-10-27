@@ -9,6 +9,8 @@ It includes offline caching, formatted timestamps, and an interactive interface.
   Retrieves the latest articles from [NewsAPI.org](https://newsapi.org/).
 - 🧾 **Detailed Article Display:**  
   Shows article titles, images, authors, and publication dates.
+- 🔄 **Pull to Refresh:**  
+  Allows users to refresh the news feed manually with a simple pull-down gesture.
 - 💾 **Offline Caching:**  
   Uses **Hive** for saving fetched news locally to enable offline viewing.
 - 🖼️ **Image Caching:**  
