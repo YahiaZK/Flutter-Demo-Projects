@@ -91,73 +91,79 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
         actions: [Icon(Icons.login)],
       ),
       drawer: Drawer(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15.0),
-            child: Text(
-              'Breaking News',
-              style: Theme.of(
-                context,
-              ).textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-
-          Expanded(
-            child: ListView.builder(
-              itemCount: _newsResponse?.articles.length,
-              itemBuilder: (context, index) {
-                var article = _newsResponse?.articles[index];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 8,
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl:
-                              article?.urlToImage ?? PLACEHOLDER_IMAGE_LINK,
-                          fit: BoxFit.contain,
-                        ),
-                        Text(
-                          'News',
-                          style: Theme.of(context).textTheme.labelLarge!
-                              .copyWith(
-                                color: primaryGreenColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                        Text(
-                          article?.title ?? '',
-                          style: Theme.of(context).textTheme.titleLarge!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "${article?.author ?? ''} , ${formatDate(article?.date ?? '')}",
-                              style: TextStyle(fontWeight: FontWeight.w300),
-                            ),
-                            Icon(
-                              Icons.share,
-                              size: 20,
-                              color: Colors.grey[700],
-                            ),
-                          ],
-                        ),
-                      ],
+      body: _newsResponse == null
+          ? Center(child: CircularProgressIndicator(color: primaryGreenColor))
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Breaking News',
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-              },
+                ),
+
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _newsResponse?.articles.length,
+                    itemBuilder: (context, index) {
+                      var article = _newsResponse?.articles[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: 8,
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl:
+                                    article?.urlToImage ??
+                                    PLACEHOLDER_IMAGE_LINK,
+                                fit: BoxFit.contain,
+                              ),
+                              Text(
+                                'News',
+                                style: Theme.of(context).textTheme.labelLarge!
+                                    .copyWith(
+                                      color: primaryGreenColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              Text(
+                                article?.title ?? '',
+                                style: Theme.of(context).textTheme.titleLarge!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${article?.author ?? ''} , ${formatDate(article?.date ?? '')}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.share,
+                                    size: 20,
+                                    color: Colors.grey[700],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
