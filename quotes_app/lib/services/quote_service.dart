@@ -18,7 +18,6 @@ class QuoteService {
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = jsonDecode(response.body);
-      print(jsonList[0]);
       return Quote.fromJson(jsonList[0]);
     } else {
       throw Exception('Faild to make request ');

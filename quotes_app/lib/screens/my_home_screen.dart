@@ -11,16 +11,16 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
-  Quote? _qoute;
+  Quote? _quote;
   final quoteService = QuoteService('e5TJboSrdfso2138yz9Rwg==pXQ8uhGhnaiLm9RO');
   _fetchQuote() async {
     try {
       setState(() {
-        _qoute = null;
+        _quote = null;
       });
       final qoute = await quoteService.getQuote();
       setState(() {
-        _qoute = qoute;
+        _quote = qoute;
       });
     } catch (e) {
       print(e);
@@ -36,19 +36,30 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Quotely'), centerTitle: true),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 10,
-            children: [
-              Text(_qoute?.quote ?? "Loading qoute ...."),
-              Text(_qoute?.author ?? "Loading author ...."),
-              Text(_qoute?.work ?? "Loading work ...."),
-            ],
-          ),
-        ),
+        child: _quote == null
+            ? CircularProgressIndicator(color: Colors.blue)
+            : Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 10,
+                  children: [
+                    Text(_quote?.quote ?? ""),
+                    Text(_quote?.author ?? ""),
+                    Text(_quote?.work ?? ""),
+                  ],
+                ),
+              ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _fetchQuote();
+        },
+        backgroundColor: Colors.blue,
+        child: Icon(Icons.refresh, color: Colors.white),
       ),
     );
   }
